@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,10 +9,19 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: {
+          DEFAULT: '#1a4789',
+          dark: '#0d2b54',
+        },
+        secondary: '#e5f0ff',
+        accent: '#ff4b4b',
+      },
+      backgroundImage: {
+        'hero-pattern': "url('/images/mount-fuji-train.jpg')",
       },
     },
   },
   plugins: [],
-} satisfies Config;
+};
+
+export default config;
