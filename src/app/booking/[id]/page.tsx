@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import SeatMap from '@/components/booking/SeatMap';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import SeatMap from "@/components/booking/SeatMap";
 
 interface PassengerDetails {
   name: string;
@@ -15,23 +15,27 @@ export default function BookingPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [passengers, setPassengers] = useState<PassengerDetails[]>([
-    { name: '', age: '', gender: '', seatNumber: '' }
+    { name: "", age: "", gender: "", seatNumber: "" },
   ]);
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
 
-  const handlePassengerDetailsChange = (index: number, field: keyof PassengerDetails, value: string) => {
+  const handlePassengerDetailsChange = (
+    index: number,
+    field: keyof PassengerDetails,
+    value: string
+  ) => {
     const updatedPassengers = [...passengers];
     updatedPassengers[index] = {
       ...updatedPassengers[index],
-      [field]: value
+      [field]: value,
     };
     setPassengers(updatedPassengers);
   };
 
   const handleSeatSelection = (seatNumber: string) => {
-    setSelectedSeats(prev => {
+    setSelectedSeats((prev) => {
       if (prev.includes(seatNumber)) {
-        return prev.filter(seat => seat !== seatNumber);
+        return prev.filter((seat) => seat !== seatNumber);
       }
       if (prev.length < passengers.length) {
         return [...prev, seatNumber];
@@ -43,7 +47,7 @@ export default function BookingPage({ params }: { params: { id: string } }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Handle booking submission
-    router.push('/booking/confirmation');
+    router.push("/booking/confirmation");
   };
 
   return (
@@ -53,21 +57,41 @@ export default function BookingPage({ params }: { params: { id: string } }) {
           {/* Progress Steps */}
           <div className="mb-8">
             <div className="flex justify-between items-center">
-              <div className={`flex items-center ${step >= 1 ? 'text-blue-600' : 'text-gray-400'}`}>
+              <div
+                className={`flex items-center ${
+                  step >= 1 ? "text-blue-600" : "text-gray-400"
+                }`}
+              >
                 <div className="w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold">
                   1
                 </div>
                 <span className="ml-2">Select Seats</span>
               </div>
-              <div className={`flex-1 border-t-2 mx-4 ${step >= 2 ? 'border-blue-600' : 'border-gray-300'}`} />
-              <div className={`flex items-center ${step >= 2 ? 'text-blue-600' : 'text-gray-400'}`}>
+              <div
+                className={`flex-1 border-t-2 mx-4 ${
+                  step >= 2 ? "border-blue-600" : "border-gray-300"
+                }`}
+              />
+              <div
+                className={`flex items-center ${
+                  step >= 2 ? "text-blue-600" : "text-gray-400"
+                }`}
+              >
                 <div className="w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold">
                   2
                 </div>
                 <span className="ml-2">Passenger Details</span>
               </div>
-              <div className={`flex-1 border-t-2 mx-4 ${step >= 3 ? 'border-blue-600' : 'border-gray-300'}`} />
-              <div className={`flex items-center ${step >= 3 ? 'text-blue-600' : 'text-gray-400'}`}>
+              <div
+                className={`flex-1 border-t-2 mx-4 ${
+                  step >= 3 ? "border-blue-600" : "border-gray-300"
+                }`}
+              />
+              <div
+                className={`flex items-center ${
+                  step >= 3 ? "text-blue-600" : "text-gray-400"
+                }`}
+              >
                 <div className="w-8 h-8 rounded-full border-2 flex items-center justify-center font-semibold">
                   3
                 </div>
@@ -115,7 +139,13 @@ export default function BookingPage({ params }: { params: { id: string } }) {
                           <input
                             type="text"
                             value={passenger.name}
-                            onChange={(e) => handlePassengerDetailsChange(index, 'name', e.target.value)}
+                            onChange={(e) =>
+                              handlePassengerDetailsChange(
+                                index,
+                                "name",
+                                e.target.value
+                              )
+                            }
                             className="w-full p-2 border border-gray-300 rounded-md"
                             required
                           />
@@ -127,7 +157,13 @@ export default function BookingPage({ params }: { params: { id: string } }) {
                           <input
                             type="number"
                             value={passenger.age}
-                            onChange={(e) => handlePassengerDetailsChange(index, 'age', e.target.value)}
+                            onChange={(e) =>
+                              handlePassengerDetailsChange(
+                                index,
+                                "age",
+                                e.target.value
+                              )
+                            }
                             className="w-full p-2 border border-gray-300 rounded-md"
                             required
                           />
@@ -138,7 +174,13 @@ export default function BookingPage({ params }: { params: { id: string } }) {
                           </label>
                           <select
                             value={passenger.gender}
-                            onChange={(e) => handlePassengerDetailsChange(index, 'gender', e.target.value)}
+                            onChange={(e) =>
+                              handlePassengerDetailsChange(
+                                index,
+                                "gender",
+                                e.target.value
+                              )
+                            }
                             className="w-full p-2 border border-gray-300 rounded-md"
                             required
                           >
@@ -167,3 +209,31 @@ export default function BookingPage({ params }: { params: { id: string } }) {
                   <button
                     onClick={() => setStep(1)}
                     className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-6 rounded-lg"
+                  >
+                    Back
+                  </button>
+                  <button
+                    onClick={handleSubmit}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div>
+                <h2 className="text-2xl font-bold mb-6">Payment</h2>
+                {/* Payment Form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Payment Details Here */}
+                </form>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

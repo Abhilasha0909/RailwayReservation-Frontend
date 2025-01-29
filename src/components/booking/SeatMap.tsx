@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/Button';
+import { useState } from "react";
+import { Button } from "@/components/ui/Button";
 
 interface Seat {
   id: string;
@@ -14,9 +14,11 @@ export default function SeatMap() {
   ]);
 
   const handleSeatClick = (seatId: string) => {
-    setSeats(seats.map(seat => 
-      seat.id === seatId ? { ...seat, isSelected: !seat.isSelected } : seat
-    ));
+    setSeats(
+      seats.map((seat) =>
+        seat.id === seatId ? { ...seat, isSelected: !seat.isSelected } : seat
+      )
+    );
   };
 
   return (
@@ -30,8 +32,8 @@ export default function SeatMap() {
             disabled={!seat.isAvailable}
             className={`
               p-4 rounded
-              ${seat.isSelected ? 'bg-blue-500 text-white' : ''}
-              ${!seat.isAvailable ? 'bg-gray-200' : ''}
+              ${seat.isSelected ? "bg-blue-500 text-white" : ""}
+              ${!seat.isAvailable ? "bg-gray-200" : ""}
             `}
           >
             {seat.number}
