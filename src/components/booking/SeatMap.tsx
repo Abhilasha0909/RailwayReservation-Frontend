@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/Button";
 
@@ -8,10 +10,20 @@ interface Seat {
   isSelected: boolean;
 }
 
-export default function SeatMap() {
-  const [seats, setSeats] = useState<Seat[]>([
-    // Initialize with your seat data
-  ]);
+interface SeatMapProps {
+  selectedSeats: string[];
+  onSeatSelect: (seatNumber: string) => void;
+  maxSeats: number;
+}
+
+const initialSeats: Seat[] = [
+  { id: "1A", number: 1, isAvailable: true, isSelected: false },
+  { id: "1B", number: 2, isAvailable: true, isSelected: false },
+  // Add more seats as needed
+];
+
+export default function SeatMap({ selectedSeats, onSeatSelect, maxSeats }: SeatMapProps) {
+  const [seats, setSeats] = useState<Seat[]>(initialSeats);
 
   const handleSeatClick = (seatId: string) => {
     setSeats(
@@ -19,6 +31,7 @@ export default function SeatMap() {
         seat.id === seatId ? { ...seat, isSelected: !seat.isSelected } : seat
       )
     );
+    onSeatSelect(seatId);
   };
 
   return (
@@ -29,7 +42,7 @@ export default function SeatMap() {
           <Button
             key={seat.id}
             onClick={() => handleSeatClick(seat.id)}
-            disabled={!seat.isAvailable}
+            disabled={!seat.isAvailable || (selectedSeats.includes(seat.id) && !seat.isSelected)}
             className={`
               p-4 rounded
               ${seat.isSelected ? "bg-blue-500 text-white" : ""}
@@ -55,7 +68,6 @@ export default function SeatMap() {
             <span>Booked</span>
           </div>
         </div>
-        <Button>Continue Booking</Button>
       </div>
     </div>
   );
