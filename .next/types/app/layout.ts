@@ -1,4 +1,4 @@
-// File: C:\Users\sachin.a.mahawar\Desktop\RailwayReservation-Frontend\src\app\layout.tsx
+// File: C:\Users\prasanthi.bikkavolu\RailwayReservation-Frontend\src\app\layout.tsx
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

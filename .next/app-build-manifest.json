@@ -16,20 +16,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(auth)/login/page.js"
     ],
-    "/search/page": [
+    "/admin/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/search/page.js"
+      "static/chunks/app/admin/page.js"
     ],
-    "/booking/[id]/page": [
+    "/admin/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/booking/[id]/page.js"
+      "static/chunks/app/admin/dashboard/page.js"
     ],
-    "/_not-found/page": [
+    "/admin/financial-report/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/admin/financial-report/page.js"
+    ],
+    "/admin/passenger-details/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/admin/passenger-details/page.js"
     ]
   }
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import Link from 'next/link';
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -37,6 +38,11 @@ export default function LoginPage() {
             Login
           </Button>
         </form>
+        <div className="mt-4 text-center">
+          <Link href="/admin" className="text-blue-500 hover:underline">
+          Login as Admin
+          </Link>
+        </div>
       </Card>
     </div>
   );
