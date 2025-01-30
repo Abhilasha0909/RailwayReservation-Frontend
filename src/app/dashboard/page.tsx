@@ -30,13 +30,18 @@ export default function DashboardPage() {
           <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
           <div className="space-y-4">
             <Button
-              className="w-full"
+              className="w-full hover:bg-blue-600 hover:text-white transition-colors duration-300"
+              variant="outline"
               onClick={() => router.push("/#search-form")}
             >
               Book New Ticket
             </Button>
-            <Button className="w-full" variant="outline">
-              View All Bookings
+            <Button
+              className="w-full hover:bg-blue-600 hover:text-white transition-colors duration-300"
+              variant="outline"
+              onClick={() => router.push("/#bookings")}
+            >
+              View Bookings
             </Button>
           </div>
         </Card>
