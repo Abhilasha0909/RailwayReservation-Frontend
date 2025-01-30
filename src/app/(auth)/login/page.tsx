@@ -17,8 +17,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="absolute top-0 left-0 w-full h-full bg-fixed bg-cover bg-no-repeat" style={{ backgroundImage: 'url(/path/to/your/background-image.jpg)' }}></div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 bg-cover bg-no-repeat" style={{ backgroundImage: 'url(/path/to/your/background-image.jpg)' }}>
       <Card className="relative w-full max-w-md p-8 bg-white shadow-lg rounded-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
         <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Login</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
