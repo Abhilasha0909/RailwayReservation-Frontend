@@ -17,7 +17,7 @@ export default function Home() {
               Book your journey through Japan's most scenic routes.
             </p>
             <Link
-              href="/search"
+              href="/#search-form"
               className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg inline-block text-lg font-semibold transition-colors duration-200"
             >
               Start Your Journey

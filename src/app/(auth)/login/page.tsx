@@ -1,4 +1,3 @@
-
 "use client";
 import { useState } from 'react';
 import { Input } from '@/components/ui/Input';
@@ -18,29 +17,34 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <Card className="w-full max-w-md p-8">
-        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 bg-cover bg-no-repeat" style={{ backgroundImage: 'url(/path/to/your/background-image.jpg)' }}>
+      <Card className="relative w-full max-w-md p-8 bg-white shadow-lg rounded-lg transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+        <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">Login</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <Input
             type="email"
             placeholder="Email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
           <Input
             type="password"
             placeholder="Password"
             value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          <Button type="submit" className="w-full">
+          <Button
+            type="submit"
+            className="w-full p-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transform transition duration-300"
+          >
             Login
           </Button>
         </form>
         <div className="mt-4 text-center">
-          <Link href="/admin" className="text-blue-500 hover:underline">
-          Login as Admin
+          <Link href="/admin" className="text-blue-500 hover:text-blue-700 hover:underline transition duration-300">
+            Login as Admin
           </Link>
         </div>
       </Card>

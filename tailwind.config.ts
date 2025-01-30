@@ -18,7 +18,7 @@ const config: Config = {
         accent: "#ff4b4b",
       },
       backgroundImage: {
-        "hero-pattern": "url('/images/mount-fuji-train.jpg')",
+        "hero-pattern": "url('/images/fuji.jpg')",
       },
     },
   },
