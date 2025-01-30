@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { FaSearch, FaTimes } from 'react-icons/fa'; // Importing search and cancel icons
+import BackButton from '@/components/BackButton'; // Import BackButton
 
 // Sample passenger data
 const passengers = [
@@ -70,6 +71,8 @@ export default function PassengerDetails() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+      <div className="w-full max-w-5xl p-4">
+      <BackButton /> {/* Use BackButton component */}
       <Card className="w-full max-w-5xl p-8 min-h-[600px]">
         <h1 className="text-2xl font-bold mb-6 text-center">Passenger Details</h1>
         <div className="flex justify-center mb-4 relative">
@@ -175,6 +178,7 @@ export default function PassengerDetails() {
           </>
         )}
       </Card>
+      </div>
     </div>
   );
 }
