@@ -83,12 +83,12 @@ export default function SearchPage() {
               <option>Express</option>
               <option>Local</option>
             </select>
-            <select className="w-full p-2 border border-gray-300 rounded-md">
+            {/* <select className="w-full p-2 border border-gray-300 rounded-md">
               <option>All Classes</option>
               <option>Economy</option>
               <option>Business</option>
               <option>First Class</option>
-            </select>
+            </select> */}
           </div>
         </div>
 

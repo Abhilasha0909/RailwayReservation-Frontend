@@ -60,6 +60,11 @@ export default function SearchForm() {
       }
     }
 
+    const passengers = parseInt(formData.passengers, 10);
+    if (!Number.isInteger(passengers) || passengers < 1) {
+      newErrors.passengers = "Please enter a valid number of passengers";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -105,10 +110,9 @@ export default function SearchForm() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* From Station */}
-        <div className="space-y-2">
+        <div className="space-y-1">
           <label className="block text-sm font-medium text-gray-700">
-            From Station
-            <span className="text-red-500">*</span>
+            From Station <span className="text-red-500">*</span>
           </label>
           <select
             name="fromStation"
@@ -130,10 +134,9 @@ export default function SearchForm() {
         </div>
 
         {/* To Station */}
-        <div className="space-y-2">
+        <div className="space-y-1">
           <label className="block text-sm font-medium text-gray-700">
-            To Station
-            <span className="text-red-500">*</span>
+            To Station <span className="text-red-500">*</span>
           </label>
           <select
             name="toStation"
@@ -155,10 +158,9 @@ export default function SearchForm() {
         </div>
 
         {/* Date */}
-        <div className="space-y-2">
+        <div className="space-y-1">
           <label className="block text-sm font-medium text-gray-700">
-            Travel Date
-            <span className="text-red-500">*</span>
+            Travel Date <span className="text-red-500">*</span>
           </label>
           <input
             type="date"
@@ -175,26 +177,27 @@ export default function SearchForm() {
         </div>
 
         {/* Passengers */}
-        <div className="space-y-2">
+        <div className="space-y-1">
           <label className="block text-sm font-medium text-gray-700">
-            Passengers
+            Passengers <span className="text-red-500">*</span>
           </label>
-          <select
+          <input
+            type="number"
             name="passengers"
             value={formData.passengers}
             onChange={handleInputChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            {[1, 2, 3, 4, 5, 6].map((num) => (
-              <option key={num} value={num}>
-                {num} {num === 1 ? "Passenger" : "Passengers"}
-              </option>
-            ))}
-          </select>
+            min="1"
+            step="1"
+            className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
+              ${errors.passengers ? "border-red-500" : "border-gray-300"}`}
+          />
+          {errors.passengers && (
+            <p className="text-red-500 text-sm mt-1">{errors.passengers}</p>
+          )}
         </div>
 
-        {/* Class Selection */}
-        <div className="space-y-2">
+        {/* Class Selection
+        <div className="space-y-1">
           <label className="block text-sm font-medium text-gray-700">
             Class
           </label>
@@ -208,7 +211,7 @@ export default function SearchForm() {
             <option value="business">Business</option>
             <option value="first">First Class</option>
           </select>
-        </div>
+        </div> */}
 
         {/* Search Button */}
         <div className="flex items-end">
