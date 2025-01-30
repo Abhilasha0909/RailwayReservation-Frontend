@@ -1,7 +1,11 @@
-import { Card } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+"use client";
+
+import { Card } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { useRouter } from "next/navigation";
 
 export default function DashboardPage() {
+  const router = useRouter();
   const bookings = [
     // Add sample bookings data here
   ];
@@ -17,9 +21,7 @@ export default function DashboardPage() {
           ) : (
             <ul className="space-y-4">
               {bookings.map((booking) => (
-                <li key={booking.id}>
-                  {/* Add booking details here */}
-                </li>
+                <li key={booking.id}>{/* Add booking details here */}</li>
               ))}
             </ul>
           )}
@@ -27,8 +29,15 @@ export default function DashboardPage() {
         <Card className="p-6">
           <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
           <div className="space-y-4">
-            <Button className="w-full">Book New Ticket</Button>
-            <Button className="w-full" variant="outline">View All Bookings</Button>
+            <Button
+              className="w-full"
+              onClick={() => router.push("/#search-form")}
+            >
+              Book New Ticket
+            </Button>
+            <Button className="w-full" variant="outline">
+              View All Bookings
+            </Button>
           </div>
         </Card>
       </div>

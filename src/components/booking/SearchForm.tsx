@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Define station type
 interface Station {
@@ -12,24 +12,24 @@ interface Station {
 
 // Sample stations data
 const stations: Station[] = [
-  { id: 'tokyo', name: 'Tokyo Station', city: 'Tokyo' },
-  { id: 'kyoto', name: 'Kyoto Station', city: 'Kyoto' },
-  { id: 'osaka', name: 'Osaka Station', city: 'Osaka' },
-  { id: 'hiroshima', name: 'Hiroshima Station', city: 'Hiroshima' },
-  { id: 'sapporo', name: 'Sapporo Station', city: 'Sapporo' },
-  { id: 'nagoya', name: 'Nagoya Station', city: 'Nagoya' },
-  { id: 'fukuoka', name: 'Hakata Station', city: 'Fukuoka' },
-  { id: 'sendai', name: 'Sendai Station', city: 'Sendai' },
+  { id: "tokyo", name: "Tokyo Station", city: "Tokyo" },
+  { id: "kyoto", name: "Kyoto Station", city: "Kyoto" },
+  { id: "osaka", name: "Osaka Station", city: "Osaka" },
+  { id: "hiroshima", name: "Hiroshima Station", city: "Hiroshima" },
+  { id: "sapporo", name: "Sapporo Station", city: "Sapporo" },
+  { id: "nagoya", name: "Nagoya Station", city: "Nagoya" },
+  { id: "fukuoka", name: "Hakata Station", city: "Fukuoka" },
+  { id: "sendai", name: "Sendai Station", city: "Sendai" },
 ];
 
 export default function SearchForm() {
   const router = useRouter();
   const [formData, setFormData] = useState({
-    fromStation: '',
-    toStation: '',
-    date: '',
-    passengers: '1',
-    class: 'economy'
+    fromStation: "",
+    toStation: "",
+    date: "",
+    passengers: "1",
+    class: "economy",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -37,26 +37,26 @@ export default function SearchForm() {
     const newErrors: Record<string, string> = {};
 
     if (!formData.fromStation) {
-      newErrors.fromStation = 'Please select departure station';
+      newErrors.fromStation = "Please select departure station";
     }
 
     if (!formData.toStation) {
-      newErrors.toStation = 'Please select arrival station';
+      newErrors.toStation = "Please select arrival station";
     }
 
     if (formData.fromStation === formData.toStation) {
-      newErrors.toStation = 'Departure and arrival stations cannot be the same';
+      newErrors.toStation = "Departure and arrival stations cannot be the same";
     }
 
     if (!formData.date) {
-      newErrors.date = 'Please select travel date';
+      newErrors.date = "Please select travel date";
     } else {
       const selectedDate = new Date(formData.date);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
 
       if (selectedDate < today) {
-        newErrors.date = 'Please select a future date';
+        newErrors.date = "Please select a future date";
       }
     }
 
@@ -64,31 +64,33 @@ export default function SearchForm() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     // Clear error when user starts typing
     if (errors[name]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [name]: ''
+        [name]: "",
       }));
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (validateForm()) {
       const searchParams = new URLSearchParams({
         from: formData.fromStation,
         to: formData.toStation,
         date: formData.date,
         passengers: formData.passengers,
-        class: formData.class
+        class: formData.class,
       });
 
       router.push(`/search?${searchParams.toString()}`);
@@ -96,7 +98,11 @@ export default function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-lg p-6">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white rounded-lg shadow-lg p-6"
+      id="search-form"
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* From Station */}
         <div className="space-y-2">
@@ -109,7 +115,7 @@ export default function SearchForm() {
             value={formData.fromStation}
             onChange={handleInputChange}
             className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
-              ${errors.fromStation ? 'border-red-500' : 'border-gray-300'}`}
+              ${errors.fromStation ? "border-red-500" : "border-gray-300"}`}
           >
             <option value="">Select departure station</option>
             {stations.map((station) => (
@@ -134,7 +140,7 @@ export default function SearchForm() {
             value={formData.toStation}
             onChange={handleInputChange}
             className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
-              ${errors.toStation ? 'border-red-500' : 'border-gray-300'}`}
+              ${errors.toStation ? "border-red-500" : "border-gray-300"}`}
           >
             <option value="">Select arrival station</option>
             {stations.map((station) => (
@@ -159,9 +165,9 @@ export default function SearchForm() {
             name="date"
             value={formData.date}
             onChange={handleInputChange}
-            min={new Date().toISOString().split('T')[0]}
+            min={new Date().toISOString().split("T")[0]}
             className={`w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent
-              ${errors.date ? 'border-red-500' : 'border-gray-300'}`}
+              ${errors.date ? "border-red-500" : "border-gray-300"}`}
           />
           {errors.date && (
             <p className="text-red-500 text-sm mt-1">{errors.date}</p>
@@ -181,7 +187,7 @@ export default function SearchForm() {
           >
             {[1, 2, 3, 4, 5, 6].map((num) => (
               <option key={num} value={num}>
-                {num} {num === 1 ? 'Passenger' : 'Passengers'}
+                {num} {num === 1 ? "Passenger" : "Passengers"}
               </option>
             ))}
           </select>

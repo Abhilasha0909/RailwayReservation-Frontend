@@ -1,16 +1,17 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold mb-4">JR Pass</h3>
             <p className="text-gray-400">
-              Experience the beauty of Japan through its extensive railway network.
-              Fast, reliable, and comfortable travel across the country.
+              Experience the beauty of Japan through its extensive railway
+              network. Fast, reliable, and comfortable travel across the
+              country.
             </p>
           </div>
 
@@ -24,12 +25,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/booking" className="text-gray-400 hover:text-white">
+                <Link
+                  href="/booking"
+                  className="text-gray-400 hover:text-white"
+                >
                   My Bookings
                 </Link>
               </li>
               <li>
-                <Link href="/schedule" className="text-gray-400 hover:text-white">
+                <Link
+                  href="/schedule"
+                  className="text-gray-400 hover:text-white"
+                >
                   Train Schedule
                 </Link>
               </li>
@@ -47,12 +54,16 @@ export default function Footer() {
             <ul className="space-y-2 text-gray-400">
               <li>Phone: +81 3-1234-5678</li>
               <li>Email: support@jrpass.jp</li>
-              <li>Address: Tokyo Station, Marunouchi,<br />Chiyoda City, Tokyo 100-0005</li>
+              <li>
+                Address: Tokyo Station, Marunouchi,
+                <br />
+                Chiyoda City, Tokyo 100-0005
+              </li>
             </ul>
           </div>
 
           {/* Newsletter */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold mb-4">Newsletter</h3>
             <p className="text-gray-400 mb-4">
               Subscribe to get updates about special offers and new routes.
@@ -70,10 +81,10 @@ export default function Footer() {
                 Subscribe
               </button>
             </form>
-          </div>
+          </div> */}
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+        <div className="border-t border-g`ray-800 mt-8 pt-8 text-center text-gray-400">
           <p>© 2024 JR Pass. All rights reserved.</p>
         </div>
       </div>
