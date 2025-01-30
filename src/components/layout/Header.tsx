@@ -11,6 +11,7 @@ export default function Header() {
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <Link href="/" className="flex items-center space-x-2">
+            <img src="/images/logo.png" alt="JR Pass Logo" className="h-8 w-auto" /> {/* Adjust the size as needed */}
             <span className="text-2xl font-bold text-blue-600">JR Pass</span>
           </Link>
           
