@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 // Define station type
 interface Station {
@@ -10,18 +11,6 @@ interface Station {
   city: string;
 }
 
-// Sample stations data
-const stations: Station[] = [
-  { id: "tokyo", name: "Tokyo Station", city: "Tokyo" },
-  { id: "kyoto", name: "Kyoto Station", city: "Kyoto" },
-  { id: "osaka", name: "Osaka Station", city: "Osaka" },
-  { id: "hiroshima", name: "Hiroshima Station", city: "Hiroshima" },
-  { id: "sapporo", name: "Sapporo Station", city: "Sapporo" },
-  { id: "nagoya", name: "Nagoya Station", city: "Nagoya" },
-  { id: "fukuoka", name: "Hakata Station", city: "Fukuoka" },
-  { id: "sendai", name: "Sendai Station", city: "Sendai" },
-];
-
 export default function SearchForm() {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -29,9 +18,27 @@ export default function SearchForm() {
     toStation: "",
     date: "",
     passengers: "1",
-    class: "economy",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [stations, setStations] = useState([]);
+
+  useEffect(() => {
+    const fetchStations = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/stations");
+        setStations(response.data);
+
+        console.log(response.data);
+      } catch (error) {
+        setErrors((prev) => ({
+          ...prev,
+          fetchStations: "Failed to fetch stations data",
+        }));
+      }
+    };
+
+    fetchStations();
+  }, []);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -77,6 +84,7 @@ export default function SearchForm() {
       ...prev,
       [name]: value,
     }));
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({
@@ -90,12 +98,14 @@ export default function SearchForm() {
     e.preventDefault();
 
     if (validateForm()) {
+      // Format the date as yyyy/mm/dd
+      const formattedDate = formData.date.split("-").join("/");
+
       const searchParams = new URLSearchParams({
-        from: formData.fromStation,
-        to: formData.toStation,
-        date: formData.date,
+        source: formData.fromStation,
+        destination: formData.toStation,
+        date: formattedDate, // Send the formatted date
         passengers: formData.passengers,
-        class: formData.class,
       });
 
       router.push(`/search?${searchParams.toString()}`);
@@ -123,8 +133,8 @@ export default function SearchForm() {
           >
             <option value="">Select departure station</option>
             {stations.map((station) => (
-              <option key={station.id} value={station.id}>
-                {station.name} - {station.city}
+              <option key={station.stationId} value={station.stationName}>
+                {station.stationName} - {station.city}
               </option>
             ))}
           </select>
@@ -147,8 +157,8 @@ export default function SearchForm() {
           >
             <option value="">Select arrival station</option>
             {stations.map((station) => (
-              <option key={station.id} value={station.id}>
-                {station.name} - {station.city}
+              <option key={station.stationId} value={station.stationName}>
+                {station.stationName} - {station.city}
               </option>
             ))}
           </select>
@@ -195,23 +205,6 @@ export default function SearchForm() {
             <p className="text-red-500 text-sm mt-1">{errors.passengers}</p>
           )}
         </div>
-
-        {/* Class Selection
-        <div className="space-y-1">
-          <label className="block text-sm font-medium text-gray-700">
-            Class
-          </label>
-          <select
-            name="class"
-            value={formData.class}
-            onChange={handleInputChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          >
-            <option value="economy">Economy</option>
-            <option value="business">Business</option>
-            <option value="first">First Class</option>
-          </select>
-        </div> */}
 
         {/* Search Button */}
         <div className="flex items-end">

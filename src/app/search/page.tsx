@@ -1,94 +1,73 @@
-'use client';
+"use client";
 
-import { useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
-import { Train } from '@/types';
-import TrainList from '@/components/booking/TrainList';
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import TrainList from "@/components/booking/TrainList";
+import { Train } from "@/types";
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
   const [trains, setTrains] = useState<Train[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setTrains([
-        {
-          id: '1',
-          number: 'N700-1',
-          name: 'Nozomi Shinkansen',
-          type: 'express',
-          availableSeats: 120,
-          departureTime: '08:00',
-          arrivalTime: '10:30',
-          duration: '2h 30m',
-          price: 13320,
-        },
-        {
-          id: '2',
-          number: 'N700-2',
-          name: 'Hikari Shinkansen',
-          type: 'express',
-          availableSeats: 85,
-          departureTime: '09:00',
-          arrivalTime: '11:45',
-          duration: '2h 45m',
-          price: 12100,
-        },
-        // Add more sample trains
-      ]);
-      setLoading(false);
-    }, 1000);
+    const fetchTrains = async () => {
+      const source = searchParams.get("source");
+      const destination = searchParams.get("destination");
+      const date = searchParams.get("date");
+      const passengers = searchParams.get("passengers");
+
+      if (!source || !destination || !date) {
+        setError("Missing search parameters");
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/trains/search",
+          {
+            params: { source, destination, date },
+          }
+        );
+
+        setTrains(response.data);
+        setLoading(false);
+      } catch (error) {
+        setError("Failed to fetch train data");
+        setLoading(false);
+      }
+    };
+
+    fetchTrains();
   }, [searchParams]);
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
         <h1 className="text-3xl font-bold mb-8">Search Results</h1>
-        
+
         {/* Search Summary */}
         <div className="bg-white rounded-lg shadow p-4 mb-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <p className="text-sm text-gray-600">From</p>
-              <p className="font-semibold">{searchParams.get('from')}</p>
+              <p className="font-semibold">{searchParams.get("source")}</p>
             </div>
             <div>
               <p className="text-sm text-gray-600">To</p>
-              <p className="font-semibold">{searchParams.get('to')}</p>
+              <p className="font-semibold">{searchParams.get("destination")}</p>
             </div>
             <div>
               <p className="text-sm text-gray-600">Date</p>
-              <p className="font-semibold">{searchParams.get('date')}</p>
+              <p className="font-semibold">{searchParams.get("date")}</p>
             </div>
             <div>
               <p className="text-sm text-gray-600">Passengers</p>
-              <p className="font-semibold">{searchParams.get('passengers')}</p>
+              <p className="font-semibold">{searchParams.get("passengers")}</p>
             </div>
-          </div>
-        </div>
-
-        {/* Filters Section */}
-        <div className="bg-white rounded-lg shadow p-4 mb-6">
-          <h2 className="text-lg font-semibold mb-4">Filters</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <select className="w-full p-2 border border-gray-300 rounded-md">
-              <option>Sort by Departure Time</option>
-              <option>Sort by Price</option>
-              <option>Sort by Duration</option>
-            </select>
-            <select className="w-full p-2 border border-gray-300 rounded-md">
-              <option>All Types</option>
-              <option>Express</option>
-              <option>Local</option>
-            </select>
-            {/* <select className="w-full p-2 border border-gray-300 rounded-md">
-              <option>All Classes</option>
-              <option>Economy</option>
-              <option>Business</option>
-              <option>First Class</option>
-            </select> */}
           </div>
         </div>
 
@@ -96,8 +75,15 @@ export default function SearchPage() {
           <div className="flex justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
+        ) : error ? (
+          <div className="text-red-500 text-center">{error}</div>
         ) : (
-          <TrainList trains={trains} passengers={parseInt(searchParams.get('passengers') || '1')} />
+          <TrainList
+            trains={trains}
+            passengers={parseInt(searchParams.get("passengers") || "1", 10)}
+            source={searchParams.get("source")}
+            destination={searchParams.get("destination")}
+          />
         )}
       </div>
     </div>
