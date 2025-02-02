@@ -88,6 +88,8 @@ export default function PaymentPage({
       validateCVV(paymentDetails.cvv);
 
       if (!errors.cardNumber && !errors.expiryDate && !errors.cvv) {
+        // do payment
+
         setStep(3);
       } else {
         alert("Validation errors");

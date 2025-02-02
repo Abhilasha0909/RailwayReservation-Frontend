@@ -63,6 +63,8 @@ export default function BookingPage({ params }: { params: { id: string } }) {
 
   const handleSubmitPassengerDetails = () => {
     if (validatePassengerDetails()) {
+      // saved passenger details now. Post it to backend after payment.
+
       setStep(2);
     }
   };
