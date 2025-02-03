@@ -10,13 +10,19 @@ export default function AdminLoginPage() {
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your admin login logic here
-    // On successful login, redirect to the admin dashboard
-    router.push('/admin/dashboard');
+    
+    // Dummy authentication logic
+    const { email, password } = formData;
+    if (email === 'admin@admin.com' && password === 'admin') {
+      router.push('/admin/dashboard');
+    } else {
+      setError('Invalid email or password');
+    }
   };
 
   return (
@@ -39,6 +45,7 @@ export default function AdminLoginPage() {
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
+          {error && <p className="text-red-500 text-center">{error}</p>}
           <Button
             type="submit"
             className="w-full p-3 bg-blue-500 text-white font-bold rounded-lg hover:bg-blue-600 transform transition duration-300"
