@@ -10,11 +10,11 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-2xl text-white">
             <h1 className="text-5xl font-bold mb-6">
-              Discover Japan by Rail
+              Discover Delhi by Rail
             </h1>
             <p className="text-xl mb-8">
-              Experience the beauty and efficiency of Japanese railways.
-              Book your journey through Japan's most scenic routes.
+              Experience the beauty and efficiency of Delhi railways.
+              Book your journey through Delhi's most scenic routes.
             </p>
             <Link
               href="/#search-form"
@@ -80,7 +80,7 @@ export default function Home() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Why Choose JR Pass
+            Why Choose DMRC
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {features.map((feature) => (
@@ -101,33 +101,35 @@ export default function Home() {
 
 const popularRoutes = [
   {
-    id: 1,
-    title: 'Tokyo to Kyoto',
-    description: 'Experience the famous Shinkansen bullet train on this popular route.',
-    image: '/images/tokyo-kyoto.jpg',
-    price: 13320,
-    from: 'Tokyo',
-    to: 'Kyoto',
+    "id": 1,
+    "title": "Kashmere Gate to Lal Quila",
+    "description": "Experience the scenic route from Kashmere Gate to Lal Quila.",
+    "image": "/images/route1.jpg",
+    "price": 150,
+    "from": "Kashmere Gate",
+    "to": "Lal Quila"
   },
   {
-    id: 2,
-    title: 'Osaka to Hiroshima',
-    description: 'Visit the historic city of Hiroshima from vibrant Osaka.',
-    image: '/images/osaka-hiroshima.jpg',
-    price: 10010,
-    from: 'Osaka',
-    to: 'Hiroshima',
+    "id": 2,
+    "title": "Lal Quila to Jama Masjid",
+    "description": "Travel through the heart of Delhi from Lal Quila to Jama Masjid.",
+    "image": "/images/route2.jpg",
+    "price": 200,
+    "from": "Lal Quila",
+    "to": "Jama Masjid"
   },
   {
-    id: 3,
-    title: 'Tokyo to Sapporo',
-    description: 'Journey to Hokkaido through scenic landscapes.',
-    image: '/images/tokyo-sapporo.jpg',
-    price: 27240,
-    from: 'Tokyo',
-    to: 'Sapporo',
-  },
+    "id": 3,
+    "title": "Jama Masjid to Delhi Gate",
+    "description": "Explore the historic landmarks from Jama Masjid to Delhi Gate.",
+    "image": "/images/route3.jpg",
+    "price": 250,
+    "from": "Jama Masjid",
+    "to": "Delhi Gate"
+  }
 ];
+
+
 
 const features = [
   {

@@ -10,8 +10,8 @@ import { usePathname } from "next/navigation"; // Import usePathname
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Japan Railways - Book Your Journey",
-  description: "Modern railway reservation system for Japan Railways",
+  title: "DMRC - Book Your Journey",
+  description: "Modern railway reservation system for Delhi Railways",
 };
 
 export default function RootLayout({

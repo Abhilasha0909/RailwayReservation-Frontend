@@ -7,9 +7,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between gap-8">
           {/* Company Info */}
           <div className="flex-1">
-            <h3 className="text-xl font-bold mb-4">JR Pass</h3>
+            <h3 className="text-xl font-bold mb-4">DMRC</h3>
             <p className="text-gray-400">
-              Experience the beauty of Japan through its extensive railway
+              Experience the beauty of Delhi through its extensive railway
               network. Fast, reliable, and comfortable travel across the
               country.
             </p>
@@ -50,13 +50,13 @@ export default function Footer() {
           <div className="flex-1">
             <h3 className="text-lg font-semibold mb-4">Our Mission</h3>
             <p className="text-gray-400">
-              At JR Pass, we are committed to providing safe, reliable, and comfortable travel experiences across Japan, connecting people and places with excellence.
+              At DMRC, we are committed to providing safe, reliable, and comfortable travel experiences across Delhi, connecting people and places with excellence.
             </p>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>© 2024 JR Pass. All rights reserved.</p>
+          <p>© 2024 DMRC. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -16,7 +16,7 @@ export default function Header() {
               alt="JR Pass Logo"
               className="h-8 w-auto"
             />
-            <span className="text-2xl font-bold text-blue-600">JR Pass</span>
+            <span className="text-2xl font-bold text-blue-600">DMRC</span>
           </Link>
 
           {/* Desktop Navigation */}
