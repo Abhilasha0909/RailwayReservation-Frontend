@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -21,10 +21,35 @@ interface PassengerDetails {
 
 export default function BookingPage({ params }: { params: { id: string } }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [step, setStep] = useState(1);
   const [passengers, setPassengers] = useState<PassengerDetails[]>([
     { name: "", age: "", gender: "" },
   ]);
+  const [trainDetails, setTrainDetails] = useState(null);
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
+  const [date, setDate] = useState("");
+
+  useEffect(() => {
+    const trainDetailsParam = searchParams.get("trainDetails");
+    const sourceParam = searchParams.get("source");
+    const destinationParam = searchParams.get("destination");
+    const dateParam = searchParams.get("date");
+
+    if (trainDetailsParam) {
+      setTrainDetails(JSON.parse(decodeURIComponent(trainDetailsParam)));
+    }
+    if (sourceParam) {
+      setSource(sourceParam);
+    }
+    if (destinationParam) {
+      setDestination(destinationParam);
+    }
+    if (dateParam) {
+      setDate(dateParam);
+    }
+  }, [searchParams]);
 
   const [errors, setErrors] = useState({
     passengers: [{ name: "", age: "", gender: "" }],
@@ -63,8 +88,7 @@ export default function BookingPage({ params }: { params: { id: string } }) {
 
   const handleSubmitPassengerDetails = () => {
     if (validatePassengerDetails()) {
-      // saved passenger details now. Post it to backend after payment.
-
+      // save passenger details now. Post it to backend after payment.
       setStep(2);
     }
   };
@@ -225,7 +249,16 @@ export default function BookingPage({ params }: { params: { id: string } }) {
               </div>
             )}
 
-            {step === 2 && <PaymentPage setStep={setStep} />}
+            {step === 2 && (
+              <PaymentPage
+                setStep={setStep}
+                trainDetails={trainDetails}
+                passengerDetails={passengers}
+                source={source}
+                destination={destination}
+                date={date}
+              />
+            )}
 
             {step === 3 && (
               <div>
