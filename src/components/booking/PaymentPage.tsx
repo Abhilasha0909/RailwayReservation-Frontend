@@ -12,10 +12,16 @@ export default function PaymentPage({
   setStep,
   trainDetails,
   passengerDetails,
+  source,
+  destination,
+  date,
 }: {
   setStep: (step: number) => void;
   trainDetails: any;
   passengerDetails: any[];
+  source: string;
+  destination: string;
+  date: string;
 }) {
   const [paymentMethod, setPaymentMethod] = useState("credit_card");
   const [paymentDetails, setPaymentDetails] = useState({
@@ -96,6 +102,9 @@ export default function PaymentPage({
         console.log("Train Details:", trainDetails);
         console.log("Passenger Details:", passengerDetails);
         console.log("Payment Details:", paymentDetails);
+        console.log("Source:", source);
+        console.log("Destination:", destination);
+        console.log("Date:", date);
 
         setStep(3);
       } else {
@@ -105,6 +114,9 @@ export default function PaymentPage({
       console.log("Train Details:", trainDetails);
       console.log("Passenger Details:", passengerDetails);
       console.log("Payment Details:", paymentDetails);
+      console.log("Source:", source);
+      console.log("Destination:", destination);
+      console.log("Date:", date);
 
       setStep(3);
     }
@@ -128,7 +140,7 @@ export default function PaymentPage({
                 onChange={() => setPaymentMethod("credit_card")}
                 className="mr-2"
               />
-                            <label htmlFor="credit_card" className="mr-4 cursor-pointer">
+              <label htmlFor="credit_card" className="mr-4 cursor-pointer">
                 Credit Card
               </label>
               <input

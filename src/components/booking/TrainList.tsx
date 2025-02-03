@@ -8,6 +8,7 @@ interface TrainListProps {
   passengers: number;
   source: string;
   destination: string;
+  date: string;
 }
 
 export default function TrainList({
@@ -15,12 +16,15 @@ export default function TrainList({
   passengers,
   source,
   destination,
+  date,
 }: TrainListProps) {
   const router = useRouter();
 
   const handleBooking = (train: Train) => {
     const trainDetails = encodeURIComponent(JSON.stringify(train));
-    router.push(`/booking/${train.trainNumber}?trainDetails=${trainDetails}`);
+    router.push(
+      `/booking/${train.trainNumber}?trainDetails=${trainDetails}&source=${source}&destination=${destination}&date=${date}`
+    );
   };
 
   return (

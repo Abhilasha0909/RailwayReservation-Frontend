@@ -27,11 +27,27 @@ export default function BookingPage({ params }: { params: { id: string } }) {
     { name: "", age: "", gender: "" },
   ]);
   const [trainDetails, setTrainDetails] = useState(null);
+  const [source, setSource] = useState("");
+  const [destination, setDestination] = useState("");
+  const [date, setDate] = useState("");
 
   useEffect(() => {
     const trainDetailsParam = searchParams.get("trainDetails");
+    const sourceParam = searchParams.get("source");
+    const destinationParam = searchParams.get("destination");
+    const dateParam = searchParams.get("date");
+
     if (trainDetailsParam) {
       setTrainDetails(JSON.parse(decodeURIComponent(trainDetailsParam)));
+    }
+    if (sourceParam) {
+      setSource(sourceParam);
+    }
+    if (destinationParam) {
+      setDestination(destinationParam);
+    }
+    if (dateParam) {
+      setDate(dateParam);
     }
   }, [searchParams]);
 
@@ -238,6 +254,9 @@ export default function BookingPage({ params }: { params: { id: string } }) {
                 setStep={setStep}
                 trainDetails={trainDetails}
                 passengerDetails={passengers}
+                source={source}
+                destination={destination}
+                date={date}
               />
             )}
 
