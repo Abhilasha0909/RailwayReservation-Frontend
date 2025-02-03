@@ -10,8 +10,12 @@ import cardValidator from "card-validator";
 
 export default function PaymentPage({
   setStep,
+  trainDetails,
+  passengerDetails,
 }: {
   setStep: (step: number) => void;
+  trainDetails: any;
+  passengerDetails: any[];
 }) {
   const [paymentMethod, setPaymentMethod] = useState("credit_card");
   const [paymentDetails, setPaymentDetails] = useState({
@@ -89,12 +93,19 @@ export default function PaymentPage({
 
       if (!errors.cardNumber && !errors.expiryDate && !errors.cvv) {
         // do payment
+        console.log("Train Details:", trainDetails);
+        console.log("Passenger Details:", passengerDetails);
+        console.log("Payment Details:", paymentDetails);
 
         setStep(3);
       } else {
         alert("Validation errors");
       }
     } else {
+      console.log("Train Details:", trainDetails);
+      console.log("Passenger Details:", passengerDetails);
+      console.log("Payment Details:", paymentDetails);
+
       setStep(3);
     }
   };
@@ -117,7 +128,7 @@ export default function PaymentPage({
                 onChange={() => setPaymentMethod("credit_card")}
                 className="mr-2"
               />
-              <label htmlFor="credit_card" className="mr-4 cursor-pointer">
+                            <label htmlFor="credit_card" className="mr-4 cursor-pointer">
                 Credit Card
               </label>
               <input

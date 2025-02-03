@@ -6,6 +6,8 @@ import { Train } from "@/types";
 interface TrainListProps {
   trains: Train[];
   passengers: number;
+  source: string;
+  destination: string;
 }
 
 export default function TrainList({
@@ -16,8 +18,9 @@ export default function TrainList({
 }: TrainListProps) {
   const router = useRouter();
 
-  const handleBooking = (trainId: string) => {
-    router.push(`/booking/${trainId}`);
+  const handleBooking = (train: Train) => {
+    const trainDetails = encodeURIComponent(JSON.stringify(train));
+    router.push(`/booking/${train.trainNumber}?trainDetails=${trainDetails}`);
   };
 
   return (
@@ -96,7 +99,7 @@ export default function TrainList({
               </div>
 
               <button
-                onClick={() => handleBooking(train.trainNumber)}
+                onClick={() => handleBooking(train)}
                 className="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200"
               >
                 Book now
